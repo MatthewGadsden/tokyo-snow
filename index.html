@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Tokyo Snow</title>
+<meta name="description" content="A warm, dark colour theme for VS Code, sampled from a snowy Tokyo alley at night lit by vending machines.">
+<meta name="theme-color" content="#1c1c1a">
+<meta property="og:title" content="Tokyo Snow">
+<meta property="og:description" content="A warm, dark colour theme for VS Code, sampled from a snowy Tokyo alley at night.">
+<meta property="og:image" content="assets/banner.jpg">
+<link rel="icon" href="assets/icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&family=Fira+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@700&text=%E6%9D%B1%E4%BA%AC%E3%81%AE%E9%9B%AA&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div data-site-nav></div>
+
+<main id="top">
+
+  <section class="hero" aria-labelledby="hero-title">
+    <canvas class="snowfall" aria-hidden="true"></canvas>
+    <div class="wrap hero-row">
+      <div class="hero-copy">
+        <p class="eyebrow">Visual Studio Code theme · 13 colours · 3 variants</p>
+        <h1 id="hero-title">Tokyo Snow</h1>
+        <p class="lede">A warm, dark theme sampled from a single photo: a snowy Tokyo alley at night, lit only by a row of vending machines. The <b>lit machines and signs</b> give it reds, oranges and golds. The <b>snow under green-tinted light</b> gives it sage, moss and pine. The <b>shadowed walls and pavement</b> become the backgrounds.</p>
+        <div class="cta">
+          <a class="btn btn-primary" href="https://marketplace.visualstudio.com/items?itemName=MatthewGadsden.tokyo-snow-vs">Install for VS Code</a>
+          <a class="btn" href="https://open-vsx.org/extension/MatthewGadsden/tokyo-snow-vs">Open VSX</a>
+          <a class="btn btn-quiet" href="#palette">See the palette</a>
+        </div>
+      </div>
+      <div class="sign" aria-hidden="true"><span>東京の雪</span></div>
+    </div>
+  </section>
+
+  <section id="preview" class="preview" aria-label="Editor preview">
+    <div class="wrap">
+      <div class="preview-bar">
+        <div class="seg" role="group" aria-label="Variant" data-variant-seg></div>
+        <p class="hint">Pick a file in the editor to switch language.</p>
+      </div>
+
+      <div data-editor></div>
+    </div>
+  </section>
+
+  <section id="ports" class="section" aria-labelledby="ports-title">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Ports</p>
+        <h2 id="ports-title">One palette, the whole desktop</h2>
+        <p class="section-lede">Tokyo Snow started as a desktop palette for Hyprland, Waybar, Rofi, Hyprlock, Neovim and the shell prompt. The VS Code extension is the port that brought the editor in line with everything around it. Each port has its own page with a preview, install steps and where every colour goes.</p>
+      </div>
+
+      <div class="desk" aria-label="Waybar and a Rofi launcher in Tokyo Snow over the alley wallpaper">
+        <div class="bar">
+          <div class="grp"><span class="mod clock">01:42</span></div>
+          <div class="grp"><span class="ws active">1</span><span class="ws visible">2</span><span class="ws">3</span><span class="ws empty hide-sm">4</span><span class="ws urgent hide-sm">5</span></div>
+          <div class="grp"><span class="mod m-gold hide-sm">cpu 12%</span><span class="mod m-gold">vol 60%</span><span class="mod m-moss">bat 84%</span></div>
+        </div>
+        <div class="rofi">
+          <div class="rofi-img" role="img" aria-label="Vending machines from the wallpaper"></div>
+          <div class="rofi-lb">
+            <div class="rofi-inp"><span class="pr">❯</span><span class="ph">co</span></div>
+            <div class="rofi-list">
+              <div class="el sel"><i></i>Code</div>
+              <div class="el"><i></i>Codium</div>
+              <div class="el act"><i></i>Alacritty</div>
+              <div class="el"><i></i>Color Picker</div>
+              <div class="el urg"><i></i>Discord</div>
+            </div>
+            <div class="rofi-modes"><span class="on">apps</span><span>run</span><span>files</span><span>win</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="port-tools">
+        <label class="search">
+          <span class="sr-only">Search ports</span>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6"/><path d="m15 15 5.5 5.5"/></svg>
+          <input id="port-search" type="search" placeholder="Search ports" autocomplete="off">
+        </label>
+        <div class="seg seg-small" role="group" aria-label="Filter ports" data-port-filter>
+          <button type="button" data-kind="all" aria-pressed="true">All</button>
+          <button type="button" data-kind="editor" aria-pressed="false">Editors</button>
+          <button type="button" data-kind="desktop" aria-pressed="false">Desktop</button>
+          <button type="button" data-kind="terminal" aria-pressed="false">Terminal</button>
+        </div>
+      </div>
+      <ul class="ports" data-ports></ul>
+      <p class="empty" data-ports-empty hidden>No port matches that search.</p>
+    </div>
+  </section>
+
+  <section id="palette" class="section" aria-labelledby="palette-title">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Palette</p>
+        <h2 id="palette-title">Thirteen colours, all from the photo</h2>
+        <p class="section-lede">Every colour in the theme is one of these. Nothing is invented outside the photo. Click a hex value to copy it.</p>
+      </div>
+      <h3 class="group-label">Accents</h3>
+      <ul class="swatches" data-swatches="accents"></ul>
+      <h3 class="group-label">Text &amp; backgrounds</h3>
+      <ul class="swatches swatches-bg" data-swatches="base"></ul>
+    </div>
+  </section>
+
+  <section id="variants" class="section" aria-labelledby="variants-title">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Variants</p>
+        <h2 id="variants-title">Three levels of glow</h2>
+        <p class="section-lede">The extension ships three themes. They share every colour name and hue, and give each colour the same job. Only the brightness and saturation change.</p>
+      </div>
+      <div class="variants" data-variants></div>
+    </div>
+  </section>
+
+  <section id="install" class="section" aria-labelledby="install-title">
+    <div class="wrap install">
+      <div class="install-copy">
+        <p class="eyebrow">Install</p>
+        <h2 id="install-title">Get it in a minute</h2>
+        <ol class="steps">
+          <li>Open the Extensions view in VS Code and search for <b>Tokyo Snow</b> by MatthewGadsden.</li>
+          <li>Click <b>Install</b>.</li>
+          <li>Press <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>P</kbd> (<kbd>Cmd</kbd>+<kbd>Shift</kbd>+<kbd>P</kbd> on Mac) and run <b>Preferences: Color Theme</b>.</li>
+          <li>Choose Tokyo Snow, Tokyo Snow Neon Alley or Tokyo Snow Vending Glow.</li>
+        </ol>
+        <p class="fine">It's on the <a href="https://marketplace.visualstudio.com/items?itemName=MatthewGadsden.tokyo-snow-vs">Visual Studio Marketplace</a> for VS Code and on <a href="https://open-vsx.org/extension/MatthewGadsden/tokyo-snow-vs">Open VSX</a> for VSCodium and Code - OSS. Every <a href="https://github.com/MatthewGadsden/tokyo-snow-vs/releases">GitHub release</a> also has the <code>.vsix</code> attached.</p>
+      </div>
+      <div class="cmds">
+        <div class="cmd">
+          <span class="cmd-label">VS Code</span>
+          <code>code --install-extension MatthewGadsden.tokyo-snow-vs</code>
+          <button type="button" class="copy" data-copy="code --install-extension MatthewGadsden.tokyo-snow-vs">Copy</button>
+        </div>
+        <div class="cmd">
+          <span class="cmd-label">VSCodium</span>
+          <code>codium --install-extension MatthewGadsden.tokyo-snow-vs</code>
+          <button type="button" class="copy" data-copy="codium --install-extension MatthewGadsden.tokyo-snow-vs">Copy</button>
+        </div>
+        <div class="cmd">
+          <span class="cmd-label">From a release</span>
+          <code>code --install-extension tokyo-snow-vs-1.1.0.vsix</code>
+          <button type="button" class="copy" data-copy="code --install-extension tokyo-snow-vs-1.1.0.vsix">Copy</button>
+        </div>
+        <div class="contrib">
+          <h3>Contributing</h3>
+          <p>Issues and pull requests are welcome on <a href="https://github.com/MatthewGadsden/tokyo-snow-vs/issues">GitHub</a>. If you change a colour, keep it inside the 13-colour palette. Edit only <code>themes/tokyo-snow-color-theme.json</code>, then run <code>python3 themes/generate-variants.py</code> to regenerate Neon Alley and Vending Glow from it.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<div data-site-footer></div>
+
+
+<script src="data.js"></script>
+<script src="site.js"></script>
+<script src="editor.js"></script>
+<script src="main.js"></script>
+</body>
+</html>
