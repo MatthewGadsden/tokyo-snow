@@ -1,0 +1,15 @@
+// Cloudflare Worker that serves the site as static assets. No Worker script: every request is a file.
+{
+  "name": "tokyo-snow",
+  "compatibility_date": "2025-06-01",
+  "assets": {
+    // The deploy workflow copies the site into dist/ first, leaving out docs and dotfiles
+    "directory": "./dist",
+    // Serve 404.html, with a 404 status, for any path that doesn't match a file
+    "not_found_handling": "404-page"
+    // html_handling keeps its default, "auto-trailing-slash", so /ports/neovim.html redirects to /ports/neovim
+  },
+  "routes": [
+    { "pattern": "tokyo-snow.matthewgadsden.dev", "custom_domain": true }
+  ]
+}

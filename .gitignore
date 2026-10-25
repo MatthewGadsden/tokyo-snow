@@ -14,3 +14,9 @@ Desktop.ini
 node_modules/
 *.log
 .env
+
+# Deploy staging folder made by the workflow
+dist/
+
+# Wrangler local state
+.wrangler/

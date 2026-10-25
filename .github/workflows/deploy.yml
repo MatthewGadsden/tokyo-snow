@@ -1,0 +1,55 @@
+name: Deploy to Cloudflare Workers
+
+on:
+  push:
+    tags:
+      - "v*"
+  workflow_dispatch:
+
+concurrency:
+  group: cloudflare-workers-deploy
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # No build step: the site is plain files. These checks stand in for lint.
+      - name: Check scripts
+        run: |
+          for f in *.js; do node --check "$f"; done
+          # every port in data.js needs a page in ports/
+          node -e '
+            global.window = {};
+            require("./data.js");
+            const fs = require("fs");
+            const missing = window.TS.PORTS.filter((p) => !fs.existsSync(`ports/${p.slug}.html`));
+            if (missing.length) {
+              console.error("Missing port pages:", missing.map((p) => `ports/${p.slug}.html`).join(", "));
+              process.exit(1);
+            }
+          '
+
+      # Copy only the site into dist/ (the assets directory in wrangler.jsonc)
+      - name: Stage site
+        run: |
+          mkdir dist
+          # * skips dotfiles (.github, .gitignore, .editorconfig)
+          for f in *; do
+            case "$f" in README.md|LICENSE|wrangler.jsonc|dist) ;; *) cp -r "$f" dist/ ;; esac
+          done
+          find dist -type f | sort
+
+      # The Worker's name, assets and custom domain are all in wrangler.jsonc
+      - name: Deploy
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          wranglerVersion: "4.149.0"
+          command: deploy

@@ -24,7 +24,30 @@ Then open <http://localhost:8000>.
 
 ## Deploying
 
-Any static host works, since the files are served as they are. For GitHub Pages, go to the repository's **Settings → Pages** and deploy from the `main` branch, root folder.
+The site runs at [tokyo-snow.matthewgadsden.dev](https://tokyo-snow.matthewgadsden.dev) as a Cloudflare Worker that serves only static assets, with no Worker script. The GitHub Actions workflow in `.github/workflows/deploy.yml` deploys it when a `v*` tag is pushed, or by hand from the Actions tab:
+
+```bash
+git tag v1.0.0
+git push origin v1.0.0
+```
+
+The workflow syntax-checks the scripts, and checks that every port in `data.js` has a page in `ports/`. It then copies the site into `dist/`, leaving out dotfiles, `README.md`, `LICENSE` and `wrangler.jsonc`, and runs `wrangler deploy`.
+
+`wrangler.jsonc` holds the Worker's name (`tokyo-snow`), the assets folder and the custom domain.
+
+One-time setup, in the GitHub repository's **Settings → Secrets and variables → Actions**:
+
+- `CLOUDFLARE_ACCOUNT_ID`: your Cloudflare account ID.
+- `CLOUDFLARE_API_TOKEN`: an API token made from the **Edit Cloudflare Workers** template. It needs the Workers routes permission on the `matthewgadsden.dev` zone so the deploy can attach the custom domain.
+
+The first deploy creates the Worker and attaches `tokyo-snow.matthewgadsden.dev`, as long as the `matthewgadsden.dev` zone is in the same Cloudflare account.
+
+Two files only do anything once deployed:
+
+- `404.html` is served, with a 404 status, for any path that doesn't exist (`not_found_handling` in `wrangler.jsonc`). It uses root-relative URLs (`/style.css`) so it works at any depth, which means it only renders properly when served, not opened from disk.
+- `_headers` sets security headers on every response and a one-week cache on `assets/`.
+
+Cloudflare also drops `.html` from URLs, so `/ports/neovim.html` redirects to `/ports/neovim`. The canonical and Open Graph URLs use those short forms. If the domain changes, update `https://tokyo-snow.matthewgadsden.dev` in `index.html` and `ports/*.html`.
 
 ## Project layout
 
@@ -40,6 +63,10 @@ Any static host works, since the files are served as they are. For GitHub Pages,
 | `style.css` | Site styles and the palette tokens |
 | `port.css` | Port page and mock styles |
 | `assets/` | Banner, icon, wallpaper and the Rofi side-panel image |
+| `404.html` | Not-found page, served by the Worker for missing paths |
+| `_headers` | Response headers for the Worker's static assets |
+| `wrangler.jsonc` | Cloudflare Worker config: name, assets folder, custom domain |
+| `.github/workflows/deploy.yml` | Checks and deploys the site on `v*` tags |
 
 The scripts are plain scripts sharing a `window.TS` namespace rather than ES modules, so the site still works when opened from disk. Load order matters: `data.js`, `site.js`, `editor.js`, then the page script.
 
@@ -48,7 +75,7 @@ The scripts are plain scripts sharing a `window.TS` namespace rather than ES mod
 ### Add a port
 
 1. Add an entry to `TS.PORTS` in `data.js`. Copy an existing entry and change its `slug`, text, install steps, colour mapping and details.
-2. Copy any file in `ports/` to `ports/<slug>.html`. Change its `<title>`, its description and `data-port`.
+2. Copy any file in `ports/` to `ports/<slug>.html`. Change its `<title>`, description, `data-port`, and the slug and text in the canonical link and `og:` tags.
 3. Pick a preview for the entry. `"editor"` reuses the VS Code mock. For a new kind of mock, add a function to `MOCKS` in `port.js` and its styles to `port.css`.
 
 The port then shows up in the home page grid, the footer and every page's "More ports" list.

@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Page not found · Tokyo Snow</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#1c1c1a">
+<!-- Served for any missing path, at any depth, so every URL here is root-relative. -->
+<link rel="icon" href="/assets/icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&family=Fira+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap">
+<link rel="stylesheet" href="/style.css">
+<style>
+  .lost { padding-block: 96px 0; }
+  .lost-head { display: grid; gap: 14px; max-width: 640px; margin-bottom: 64px; }
+  .lost h1 { margin: 0; font: 700 clamp(44px, 8vw, 84px)/.95 var(--sans); letter-spacing: -.03em; color: var(--snow); text-wrap: balance; }
+  .lost-head p:not(.eyebrow) { margin: 0; font-size: 18px; color: var(--gold); max-width: 52ch; }
+  .lost-head .cta { margin-top: 8px; }
+</style>
+</head>
+<body data-root="/">
+<div data-site-nav></div>
+<main class="wrap lost">
+  <div class="lost-head">
+    <p class="eyebrow">404 · Not found</p>
+    <h1>Nothing down this alley</h1>
+    <p>That page doesn't exist. It may have moved, or the link has a typo. The theme and all of its ports are still here.</p>
+    <div class="cta">
+      <a class="btn btn-primary" href="/">Back to Tokyo Snow</a>
+      <a class="btn" href="/#ports">Browse the ports</a>
+    </div>
+  </div>
+  <ul class="ports" data-ports></ul>
+</main>
+<div data-site-footer></div>
+<script src="/data.js"></script>
+<script src="/site.js"></script>
+<script>
+  TS.$("[data-ports]").innerHTML = TS.PORTS.map(TS.portCard).join("");
+  TS.start();
+</script>
+</body>
+</html>
