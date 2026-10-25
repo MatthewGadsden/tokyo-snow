@@ -1,6 +1,36 @@
-# Tokyo Snow website
+<p align="center">
+  <a href="https://tokyo-snow.matthewgadsden.dev">
+    <img alt="Tokyo Snow icon" src="assets/icon.png" width="75" />
+  </a>
+</p>
+<h1 align="center">
+  Tokyo Snow Website
+</h1>
 
-The website for [Tokyo Snow](https://github.com/MatthewGadsden/tokyo-snow-vs), a warm, dark colour theme sampled from a photo of a snowy Tokyo alley at night, lit by vending machines.
+<div align="center">
+  <img src="https://img.shields.io/badge/HTML5-E34F26?logo=html5&logoColor=fff&style=for-the-badge" alt="HTML5 Badge">
+  <img src="https://img.shields.io/badge/CSS-663399?logo=css&logoColor=fff&style=for-the-badge" alt="CSS Badge">
+  <img src="https://img.shields.io/badge/JavaScript-F7DF1E?logo=javascript&logoColor=000&style=for-the-badge" alt="JavaScript Badge">
+  <img src="https://img.shields.io/badge/Cloudflare%20Workers-F38020?logo=cloudflareworkers&logoColor=fff&style=for-the-badge" alt="Cloudflare Workers Badge">
+</div>
+
+<div align="center">
+  <img alt="GitHub Issues or Pull Requests" src="https://img.shields.io/github/issues-pr/MatthewGadsden/tokyo-snow">
+  <img alt="GitHub Actions Workflow Status" src="https://img.shields.io/github/actions/workflow/status/MatthewGadsden/tokyo-snow/deploy.yml">
+  <img alt="GitHub Tag" src="https://img.shields.io/github/v/tag/MatthewGadsden/tokyo-snow">
+</div>
+
+<p align="center">
+  The website for <a href="https://github.com/MatthewGadsden/tokyo-snow-vs">Tokyo Snow</a>, a warm, dark colour theme sampled from a snowy Tokyo alley at night, lit by vending machines.
+  <br/>
+  <a href="https://tokyo-snow.matthewgadsden.dev"><b>tokyo-snow.matthewgadsden.dev</b></a>
+</p>
+
+<p align="center">
+  <a href="https://tokyo-snow.matthewgadsden.dev">
+    <img alt="The Tokyo Snow website: the alley photo with the title, and a VS Code window in the theme below it" src=".github/screenshot.jpg" />
+  </a>
+</p>
 
 It's a static site: plain HTML, CSS and JavaScript, with no build step and no dependencies.
 

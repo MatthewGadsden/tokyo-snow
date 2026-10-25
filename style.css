@@ -36,6 +36,7 @@ html { scroll-behavior: smooth; scroll-padding-top: 76px; }
 body {
   margin: 0;
   overflow-x: clip;
+  scrollbar-color: color-mix(in srgb, var(--dim) 40%, transparent) transparent;
   background: var(--page);
   color: var(--gold);
   font: 16px/1.6 var(--sans);
